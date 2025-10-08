@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->smallInteger('role')->default(1);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -25,7 +26,8 @@ return new class extends Migration
         User::create([
             "name" => "Admin",
             "email" => "admin@teszt.com",
-            "password" => "admin123"
+            "password" => "admin123",
+            "role"=>0,
         ]);
 
         User::create([

@@ -16,20 +16,20 @@ return new class extends Migration
             $table->id();
             $table->string('author');
             $table->longText('title');
-            $table->integer('pieces');
+            
             $table->timestamps();
         });
     
         Book::create([
             "author" => "Bukfenc",
             "title" => "Tizenkét kutyaszabály az élethez",
-            "pieces" => 12
+            
         ]);
     
         Book::create([
             "author" => "Kertész Géza",
             "title" => "A nagymenő",
-            "pieces" => 5
+            
         ]);
 
     }

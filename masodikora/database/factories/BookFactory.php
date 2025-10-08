@@ -19,7 +19,7 @@ class BookFactory extends Factory
         return [
             'author' =>fake('hu_HU')->name(),
             'title' =>fake()->sentence(3),
-            'pieces' =>fake()->numberBetween(1,23),
+            
         ];
     }
 }
