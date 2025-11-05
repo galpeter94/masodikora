@@ -25,6 +25,8 @@ protected function setKeysForSaveQuery($query)
         'user_id',
         'copy_id',
         'start',
+        'end',
+        'warnings'
     ];
 
     

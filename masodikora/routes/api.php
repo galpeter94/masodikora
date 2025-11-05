@@ -1,23 +1,33 @@
 <?php
 
-use App\Http\Controllers\BookController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
+Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
-
-Route::get('/books', [BookController::class,'index']);
-
-Route::get('/users', [UserController::class, 'index']);
-
-Route::get('/users/{id}', [UserController::class, 'show']);
-
-Route::post('/users', [UserController::class, 'store']);
+});
 
 
-Route::put('/users/{id}', [UserController::class, 'update']);
+//BÁRKI ÁLTAL LÁTOGATHATÓ ÚTVONALAK A POPESZOMBA
+Route::post('/register',[RegisteredUserController::class, 'store']);
+Route::post('/login',[AuthenticatedSessionController::class, 'store']);
 
-Route::delete('/users/{id}', [UserController::class, 'destroy']);
+//AUTENTIKÁLT FELHASZNÁLÓK ÁLTAL LÁTOGATHATÓ ÚTVONALAK A POPESZOMBA
+Route::middleware(['auth:sanctum'])
+->group(function () {
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    // Kijelentkezés útvonal
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
+});
+
+
+Route::middleware(['auth:sanctum', Admin::class])
+->group(function () {
+    Route::get('/users', [UserController::class, 'index']);
+});
+
+
+
