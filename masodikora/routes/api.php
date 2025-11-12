@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\LendingController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +14,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 //BÁRKI ÁLTAL LÁTOGATHATÓ ÚTVONALAK A POPESZOMBA
+//Route::get('/book-with-copies', [BookController::class, 'bookWithCopies']);
 Route::post('/register',[RegisteredUserController::class, 'store']);
 Route::post('/login',[AuthenticatedSessionController::class, 'store']);
 
@@ -19,6 +22,8 @@ Route::post('/login',[AuthenticatedSessionController::class, 'store']);
 Route::middleware(['auth:sanctum'])
 ->group(function () {
     Route::get('/users/{id}', [UserController::class, 'show']);
+    Route::get('/book-with-copies', [BookController::class, 'bookWithCopies']);
+    Route::get('/lending-with-copies/{id}', [LendingController::class, 'lendingWithCopies']);  //ezt az autentikáció miatt csak TC-ben tudjuk tesztelni
     // Kijelentkezés útvonal
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 });

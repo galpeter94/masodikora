@@ -29,5 +29,10 @@ protected function setKeysForSaveQuery($query)
         'warnings'
     ];
 
-    
+      public function copies(){
+        return $this->belongsTo(Copy::class);  //itt a Copy-t nem kell külön importálni, mert egy mappában vagyunk vele és megtalálja.
+    };
+
+
+
 }

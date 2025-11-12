@@ -15,4 +15,12 @@ class Book extends Model
         
     ];
 
+
+    //
+    public function copies(){
+        return $this->hasMany(Copy::class); //elvileg így is működik, mert SZABVÁNY szerint neveztük el, id, és táblanév_id...
+    }
+
+
+
 }

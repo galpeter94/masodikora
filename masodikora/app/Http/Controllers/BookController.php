@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function index()
+    public function bookWithCopies()
     {
-        return Book::all();
+        return Book::with("copies")->get();
     }
 }
