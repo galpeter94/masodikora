@@ -11,4 +11,11 @@ class BookController extends Controller
     {
         return Book::with("copies")->get();
     }
+
+    public function bookTitle($title){
+        return Book::where('title', $title)
+        ->get();
+    }
+
+
 }
